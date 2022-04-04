@@ -38,11 +38,12 @@ public class Scraper {
     private static void getValues() {
         driver.findElement(By.id("viewAllSchools")).click();
 
-        String[] categories = {"Athletic Student Aid", "Coaching Salaries, Benefits and Bonuses paid by the University and Related Entities",
-                "Support Staff/ Administrative Compensation, Benefits and Bonuses paid by the University and Related Entities",
-                "Sports Equipment, Uniforms and Supplies",
-                "Athletic Facilities Debt Service, Leases and Rental Fee"};
-//        String[] categories = {"Support Staff/ Administrative Compensation, Benefits and Bonuses paid by the University and Related Entities"};
+        // String[] categories = {"Athletic Student Aid", "Coaching Salaries, Benefits and Bonuses paid by the University and Related Entities",
+        //         "Support Staff/ Administrative Compensation, Benefits and Bonuses paid by the University and Related Entities",
+        //         "Sports Equipment, Uniforms and Supplies", "Athletic Facilities Debt Service, Leases and Rental Fee", "Recruiting",
+        //         "Game Expenses", "Direct Overhead and Administrative Expenses", "Student-Athlete Meals (non-travel)", "Sports Camp Expenses"};
+        String[] categories = {"Recruiting",
+                "Game Expenses", "Direct Overhead and Administrative Expenses", "Student-Athlete Meals (non-travel)", "Sports Camp Expenses"};
 
         String[] years = {"2018", "2019", "2020", "2021"};
 
@@ -104,6 +105,10 @@ public class Scraper {
             n = "Sports equipment";
         } else if (n.equals("Athletic Facilities Debt Service, Leases and Rental Fee")) {
             n = "Athletic facilities";
+        } else if (n.equals("Direct Overhead and Administrative Expenses")) {
+            n = "Overhead Expenses";
+        } else if (n.equals("Student-Athlete Meals (non-travel)")) {
+            n = "Athlete Meals";
         }
 
         String file = String.format("%s_%s.csv", y, n);
@@ -130,7 +135,7 @@ public class Scraper {
     // Sets properties and creates webdriver
     private static WebDriver createDriver() {
         // Set properties
-        System.setProperty("webdriver.gecko.driver", "/git/Basketball_Scraper/src/main/resources/geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver", "/git/sportico-database-scraper/src/main/resources/geckodriver.exe");
         System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "null");
 
         FirefoxOptions options = new FirefoxOptions();
